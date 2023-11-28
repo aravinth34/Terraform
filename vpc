@@ -1,0 +1,7 @@
+1.vpc  - create vpc
+2.subnet - create subnet 
+3.igw  - create inetnet gate way  - attach to vpc
+4.route - create route table - add subnet - route add ingw
+5.sg  - create securiy group  - Inbound rules allow 0.0.0.0/0
+
+  
