@@ -5,7 +5,7 @@ resource "aws_vpc" "main" {
   tags = {
     Name = "vpc_terraform"
   }
-
+}
 variable "public_subnet_cidrs" {
  type        = list(string)
  description = "PublicSubnet"
@@ -50,6 +50,4 @@ resource "aws_route_table_association" "public_subnet_asso" {
  count = length(var.public_subnet_cidrs)
  subnet_id      = element(aws_subnet.public_subnets[*].id, count.index)
  route_table_id = aws_route_table.second_rt.id
-}
-
 }
