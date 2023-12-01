@@ -66,3 +66,49 @@ resource "aws_route_table_association" "public_subnet_asso" {
  subnet_id      = element(aws_subnet.public_subnets[*].id, count.index)
  route_table_id = aws_route_table.second_rt.id
 }
+
+resource "aws_security_group" "allow_tls" {
+  name        = "allow_All"
+  description = "Allow all tcp traffic"
+  vpc_id      = aws_vpc.main.id
+
+//Inbound rule
+  ingress {
+    description      = "All ssh VPC"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  //  ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
+  }
+
+//Inbound rule
+  ingress {
+    description      = "All http VPC"
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  //  ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
+  }
+//Inbound rule
+  ingress {
+    description      = "All https VPC"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  //  ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
+  }
+//Outbound rule
+  egress { 
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "tcp22"
+  }
+}
