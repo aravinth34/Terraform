@@ -1,0 +1,4 @@
+chmod 400 mumbai_linux_pem.pem
+ssh -i "/home/maravinth/Documents/mumbai_linux_pem.pem" ec2-user@65.1.1.183
+
+
