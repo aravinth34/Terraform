@@ -38,6 +38,7 @@ resource "aws_subnet" "public_subnets" {
  vpc_id            = aws_vpc.main.id
  cidr_block        = element(var.public_subnet_cidrs, count.index)
  availability_zone = element(var.azs, count.index)
+//Enable auto-assign public IPv4 address
  map_public_ip_on_launch = true
  tags = {
    Name = "Subnet_Pub ${count.index + 1}"
