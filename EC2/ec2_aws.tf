@@ -17,7 +17,11 @@ provider "aws" {
 resource "aws_instance" "example_server" {
   ami           = "ami-02a2af70a66af6dfb"
   instance_type = "t2.micro"
-
+  key_name      = "mumbai_linux"
+  vpc_security_group_ids = ["sg-092ff5b85daa63af0"]
+  subnet_id     = "subnet-0b3a3a3a2f271cb3b"
+  count         = 1
+  
   tags = {
     Name = "nginx_test"
   }
