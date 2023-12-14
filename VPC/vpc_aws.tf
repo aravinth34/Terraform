@@ -113,7 +113,7 @@ resource "aws_security_group" "allow_tls" {
   }
 //Inbound rule
   ingress {
-    description      = "Jenkins"
+    description      = "SonarQube"
     from_port        = 9000
     to_port          = 9000
     protocol         = "tcp"
