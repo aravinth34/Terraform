@@ -74,9 +74,17 @@ resource "aws_security_group" "allow_tls" {
   description = "Allow all tcp traffic"
   vpc_id      = aws_vpc.main.id
 
+//Outbound rule
+  egress { 
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
 //Inbound rule
   ingress {
-    description      = "All ssh VPC"
+    description      = "SSH"
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
@@ -86,21 +94,19 @@ resource "aws_security_group" "allow_tls" {
 
 //Inbound rule
   ingress {
-    description      = "All http VPC"
+    description      = "HTTP"
     from_port        = 80
     to_port          = 80
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
-  //  ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
   }
 //Inbound rule
   ingress {
-    description      = "All https VPC"
+    description      = "HTTPS"
     from_port        = 443
     to_port          = 443
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
-  //  ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
   }
 //Inbound rule
   ingress {
@@ -109,7 +115,6 @@ resource "aws_security_group" "allow_tls" {
     to_port          = 8080
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
-  //  ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
   }
 //Inbound rule
   ingress {
@@ -118,16 +123,15 @@ resource "aws_security_group" "allow_tls" {
     to_port          = 9000
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
-  //  ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
   }
-//Outbound rule
-  egress { 
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
+//Inbound rule
+  ingress {
+    description      = "Nexus"
+    from_port        = 8081
+    to_port          = 8081
+    protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
-
   tags = {
     Name = "tcp22"
   }
