@@ -1,0 +1,6 @@
+yum install python3-pip
+
+pip install awscli
+
+
+aws configure
